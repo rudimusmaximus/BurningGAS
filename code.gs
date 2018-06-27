@@ -4,7 +4,7 @@
 // global variable for hard coded values wwObj.ENUMS.SEMVER for example
 const wwObj = {
   ENUMS = {
-    SEMVER = "0.0.1";
+    SEMVER = "0.1.0";
   }
 }
 
