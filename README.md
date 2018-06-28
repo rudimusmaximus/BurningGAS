@@ -7,7 +7,11 @@ Check out links for reading on our [Flipboard magazine](https://flipboard.com/@r
 # How to use
 Open a new google spreadsheet.
 
-Pull the gs and html files form this repo into your sheet's attached script editor.
+Pull the .gs and .html files form this repository into your sheet's attached 
+script editor.
+
+Enable any advanced services listed in the menu functions like sheets (both in 
+the script editor and via link in the GCP console). See notes in the menu functions.
 
 Refresh your sheet and use the new menu to try out various demonstrations.
 

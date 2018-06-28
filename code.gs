@@ -4,7 +4,7 @@
 // global variable for hard coded values wwObj.ENUMS.SEMVER for example
 var wwObj = {
   ENUMS : {
-    SEMVER : "0.1.2"
+    SEMVER : "1.0.0"//working version as of end of GAS working session part 2
   }
 };
 
