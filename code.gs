@@ -2,11 +2,11 @@
  * @OnlyCurrentDoc
  */
 // global variable for hard coded values wwObj.ENUMS.SEMVER for example
-const wwObj = {
-  ENUMS = {
-    SEMVER = "0.1.0";
+var wwObj = {
+  ENUMS : {
+    SEMVER : "0.1.0"
   }
-}
+};
 
 /**
 * Example function onOpen (modified), see this link for details: 
