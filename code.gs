@@ -4,7 +4,7 @@
 // global variable for hard coded values wwObj.ENUMS.SEMVER for example
 var wwObj = {
   ENUMS : {
-    SEMVER : "0.1.0"
+    SEMVER : "0.1.2"
   }
 };
 

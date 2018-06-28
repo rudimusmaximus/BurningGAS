@@ -43,7 +43,7 @@ function setupInputSheets() {
  * Web: ctrlq.org  Email: amit@labnol.org
  */
 function updateMulitpleCells(spreadsheetId) {
-  var spreadsheetId = spreadsheetId || "1l650V0jjkjb9vho8LW7Hf4SNlbtQWkmD_2qfTzrzZJg"; //uses this sheet if not called from elsewhere
+  var spreadsheetId = spreadsheetId || SpreadsheetApp.getActive().getId(); //when called from menu no passed param, get the id in the users current sheet
   // TODO: compare to other approaches on batchUpdate and examine google examples
   var data = [{
       range: "'Update Multiple Values'!A2", // Update single cell
