@@ -3,6 +3,7 @@
  * demo functions just activate the sheet by name expecting it to be there
  */
 function setupInputSheets() {
+  setupQueryInputSheet();
   //CREATE SHEETS
   var spreadsheet = SpreadsheetApp.getActive();
   spreadsheet.getRange('B9').activate();
@@ -42,7 +43,7 @@ function setupInputSheets() {
  * Modified from original Written by Amit Agarwal
  * Web: ctrlq.org  Email: amit@labnol.org
  */
-function updateMulitpleCells(spreadsheetId) {
+function updateMultipleCells(spreadsheetId) {
   var spreadsheetId = spreadsheetId || SpreadsheetApp.getActive().getId(); //when called from menu no passed param, get the id in the users current sheet
   // TODO: compare to other approaches on batchUpdate and examine google examples
   var data = [{
