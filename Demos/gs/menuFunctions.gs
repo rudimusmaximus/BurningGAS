@@ -15,9 +15,9 @@ function setupInputSheets() {
   spreadsheet.getRange('A1').activate();
   spreadsheet.getCurrentCell().setFormula('=hyperlink("https://issuetracker.google.com/issues/36761866","comment 60 on original issue")');
   spreadsheet.getRange('A2').activate();
+  spreadsheet.getRange('C1').activate().setValue('This function works on any sheet, but run here for demonstration.');
   spreadsheet.setActiveSheet(spreadsheet.getSheetByName('Update Multiple Values'), true);
   spreadsheet.getCurrentCell().setFormula('=hyperlink("https://ctrlq.org/code/20504-update-google-sheet-cell-values","source article for initial idea")');
-  spreadsheet.getRange('A2').activate();
   //PREP SHEETS
   highlights();
 
@@ -44,6 +44,8 @@ function setupInputSheets() {
  * Web: ctrlq.org  Email: amit@labnol.org
  */
 function updateMultipleCells(spreadsheetId) {
+  //activate the sheet but note that the approach for updating using the advanced service will work for any spreadsheet you have access to
+  SpreadsheetApp.getActive().getSheetByName('Update Multiple Values').activate();
   var spreadsheetId = spreadsheetId || SpreadsheetApp.getActive().getId(); //when called from menu no passed param, get the id in the users current sheet
   // TODO: compare to other approaches on batchUpdate and examine google examples
   var data = [{
