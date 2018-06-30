@@ -17,7 +17,7 @@ function setupQueryInputSheet() {
 }
 
 /**
- * quickly test our function
+ * run query, place output, trim the sheet to match our 2d array of output data
  */
 function runQueryPlaceOutput() {
   var ssId = SpreadsheetApp.getActiveSpreadsheet().getId();
@@ -45,10 +45,10 @@ function runQueryPlaceOutput() {
 
   SpreadsheetApp.getActiveSpreadsheet().setActiveSheet(outputSheet);
 
-//  trimResultsInSheet(ssId,outputSheet.getId,rows, columns);
+  trimResultsInSheet(ssId, outputSheet.getSheetId(), 'queryASheet-output', rows, columns);
 
   return true;
-} //end test
+} //end runQueryPlaceOutput
 /**
  * This function uses url fetch to get data from a spreadsheet using a query style 
  * 
@@ -78,3 +78,31 @@ function queryASpreadsheet(sheetId, sheetName, rangeSyntax, queryString) {
 
   return dataTwoD;
 }
+/**
+ * this uses advanced sheets service to set the size of the new output sheet to match
+ * our 2d array
+ */
+function trimResultsInSheet(spreadsheetId, sheetId, sheetName, rows, columns) {
+  
+  
+  var resource = {
+  "requests": [
+    {
+      "updateSheetProperties": {
+        "properties": {
+          "sheetId": sheetId,
+          "title": sheetName,
+          "gridProperties": {
+            "columnCount": columns,
+            "rowCount": rows
+          }
+        },
+        "fields": "*"
+      }
+    }
+  ],
+  "includeSpreadsheetInResponse": false
+};
+  Sheets.Spreadsheets.batchUpdate(resource, spreadsheetId);
+}
+
