@@ -20,7 +20,8 @@ function setupQueryInputSheet() {
  * quickly test our function
  */
 function runQueryPlaceOutput() {
-  var result = queryASpreadsheet(SpreadsheetApp.getActiveSpreadsheet().getId(),
+  var ssId = SpreadsheetApp.getActiveSpreadsheet().getId();
+  var result = queryASpreadsheet(ssId,
     'queryASheet-input',
     'A1:C',
     'SELECT A,B,C WHERE B < 7');
@@ -43,6 +44,8 @@ function runQueryPlaceOutput() {
   outputSheet.getRange(1, 1, rows, columns).setValues(result);
 
   SpreadsheetApp.getActiveSpreadsheet().setActiveSheet(outputSheet);
+
+//  trimResultsInSheet(ssId,outputSheet.getId,rows, columns);
 
   return true;
 } //end test
