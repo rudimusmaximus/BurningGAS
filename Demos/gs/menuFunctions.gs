@@ -11,21 +11,21 @@ function setupInputSheets() {
   var umcSheet = spreadsheet.getSheetByName('Update Multiple Cells');
   if (umcSheet) {
     umcSheet.clear();
-    populateUpdateMultipleCells();
   } else {
     // create it - insert a new sheet at the beginning
-    umcSheet = thisSpreadsheet.insertSheet('Update Mulitple Cells', 0);
-    //PREP SHEETS
-    populateUpdateMultipleCells();
-    highlightsForUpdateMultipleCells();
+    umcSheet = spreadsheet.insertSheet('Update Multiple Cells', 0);
   }
+  //PREP SHEETS
+  populateUpdateMultipleCells();
+  highlightsForUpdateMultipleCells();
+
   //Manipulate Disjoint Ranges
   var mdrSheet = spreadsheet.getSheetByName('Manipulate Disjoint Ranges');
   if (mdrSheet) {
     mdrSheet.clear();
   } else {
     // create it - insert a new sheet at the beginning
-    mdrSheet = thisSpreadsheet.insertSheet('Manipulate Disjoint Ranges', 0);
+    mdrSheet = spreadsheet.insertSheet('Manipulate Disjoint Ranges', 0);
   }
   //PREP SHEETS
   populateManipulateDisjointRanges();
@@ -34,17 +34,14 @@ function setupInputSheets() {
   function populateManipulateDisjointRanges() {
     mdrSheet.getRange('A1').activate();
     mdrSheet.getCurrentCell().setFormula('=hyperlink("https://issuetracker.google.com/issues/36761866","comment 60 on original issue")');
-    mdrSheet.getRange('C1').activate().setValue('This function works on any sheet, but run here for demonstration.');
   }
 
   function populateUpdateMultipleCells() {
-    // umcSheet.setActiveSheet(umcSheet.getSheetByName('Update Multiple Values'), true);
+    SpreadsheetApp.setActiveSheet(umcSheet, true);
     umcSheet.getCurrentCell().setFormula('=hyperlink("https://ctrlq.org/code/20504-update-google-sheet-cell-values","source article for initial idea")');
   }
 
   function highlightsForUpdateMultipleCells() {
-    var spreadsheet = SpreadsheetApp.getActive();
-    umcSheet.setActiveSheet(umcSheet.getSheetByName('Update Multiple Values'), true);
     umcSheet.getRange('A2').activate();
     umcSheet.getActiveRangeList().setBackground('#ffff00');
     umcSheet.getRange('B2:B4').activate();
@@ -65,18 +62,19 @@ function setupInputSheets() {
  * Web: ctrlq.org  Email: amit@labnol.org
  */
 function updateMultipleCells(spreadsheetId) {
-  //activate the sheet but note that the approach for updating using the advanced service will work for any spreadsheet you have access to
-  SpreadsheetApp.getActive().getSheetByName('Update Multiple Values').activate();
-  var spreadsheetId = spreadsheetId || SpreadsheetApp.getActive().getId(); //when called from menu no passed param, get the id in the users current sheet
+  var spreadsheet = SpreadsheetApp.getActive();
+  
+  spreadsheet.getSheetByName('Update Multiple Cells').activate();
+  var spreadsheetId = spreadsheetId || spreadsheet.getId(); //when called from menu no passed param, get the id in the users current sheet
   // TODO: compare to other approaches on batchUpdate and examine google examples
   var data = [{
-      range: "'Update Multiple Values'!A2", // Update single cell
+      range: "'Update Multiple Cells'!A2", // Update single cell
       values: [
         ["A2"]
       ]
     },
     {
-      range: "'Update Multiple Values'!B2:B4", // Update a column
+      range: "'Update Multiple Cells'!B2:B4", // Update a column
       values: [
         ["B2"],
         ["B3"],
@@ -84,20 +82,20 @@ function updateMultipleCells(spreadsheetId) {
       ]
     },
     {
-      range: "'Update Multiple Values'!C2:E2", // Update a row
+      range: "'Update Multiple Cells'!C2:E2", // Update a row
       values: [
         ["C2", "D2", "E2"]
       ]
     },
     {
-      range: "'Update Multiple Values'!F2:H3", // Update a 2d range
+      range: "'Update Multiple Cells'!F2:H3", // Update a 2d range
       values: [
         ["F2", "G2", "H2"],
         ["F3", "G3", "H3"]
       ]
     },
     {
-      range: "'Update Multiple Values'!A6", // Update a cell with a 2d array
+      range: "'Update Multiple Cells'!A6", // Update a cell with a 2d array
       values: [
         ["F2", "G2", "H2"],
         ["F3", "G3", "H3"]
@@ -119,8 +117,11 @@ function updateMultipleCells(spreadsheetId) {
  * select multiple ranges, run function, each selection has border set
  **/
 function manipulateDisjointRanges() {
+  var ss = SpreadsheetApp;
+  
+  ss.setActiveSheet(ss.getActiveSpreadsheet().getSheetByName('Manipulate Disjoint Ranges'), true);
 
-  SpreadsheetApp.getActiveSheet().getActiveRangeList().getRanges().forEach(Outline);
+  ss.getActiveSheet().getActiveRangeList().getRanges().forEach(Outline);
 
   function Outline(R) {
     R.setBorder(true, true, true, true, true, true);
