@@ -2,6 +2,16 @@
  * setup our input sheet
  */
 function setupQueryInputSheet() {
+  // first clear anything in a sheet by that name in case running twice
+  var thisSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var inputSheet = thisSpreadsheet.getSheetByName('queryASheet-input');
+  if (inputSheet) {
+    inputSheet.clear();
+  } else {
+    // insert a new sheet at the beginning
+    inputSheet = thisSpreadsheet.insertSheet('queryASheet-input', 0);
+  }
+  // prepare values
   var values = [
     ['Date', 'Amount', 'Named', '=hyperlink("https://gist.github.com/rudimusmaximus/133ef10736888e42f0c9ba89c07be546","source Gist for initial idea")'],
     ['1/1/2016', '1', 'person jan',''],
@@ -11,9 +21,8 @@ function setupQueryInputSheet() {
     ['5/1/2017', '5', 'person may',''],
     ['6/1/2017', '6', 'person jun',''],
   ];
-  var spreadsheet = SpreadsheetApp.getActive();
-  var inputSheet = spreadsheet.insertSheet('queryASheet-input',0);
-    inputSheet.getRange('A1:D7').setValues(values);
+  // place expected data to query 
+  inputSheet.getRange('A1:D7').setValues(values);
 }
 
 /**
@@ -24,7 +33,7 @@ function runQueryPlaceOutput() {
   var result = queryASpreadsheet(ssId,
     'queryASheet-input',
     'A1:C',
-    'SELECT A,B,C WHERE B < 7');
+    'SELECT A,B,C WHERE B < 4');
 
   var rows = result.length; //7
   var columns = result[0].length; //3
@@ -37,7 +46,6 @@ function runQueryPlaceOutput() {
   } else {
     // insert a new sheet at the beginning
     outputSheet = thisSpreadsheet.insertSheet('queryASheet-output', 0);
-   //how do do this with like SpreadsheetApp.create(String name, Integer rows, Integer columns)?TODO asked on G+
   }
 
   // write to the outputSheet

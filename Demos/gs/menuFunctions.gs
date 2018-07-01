@@ -3,39 +3,60 @@
  * demo functions just activate the sheet by name expecting it to be there
  */
 function setupInputSheets() {
-  setupQueryInputSheet();
   //CREATE SHEETS
+  //Gist Query A sheet
+  setupQueryInputSheet();
+  //Update Multiple Cells
   var spreadsheet = SpreadsheetApp.getActive();
-  spreadsheet.getRange('B9').activate();
-  spreadsheet.insertSheet(2);
-  spreadsheet.getActiveSheet().setName('Update Multiple Values');
-  spreadsheet.insertSheet(3);
-  spreadsheet.getRange('D27').activate();
-  spreadsheet.getActiveSheet().setName('Manipulate Disjoint Ranges');
-  spreadsheet.getRange('A1').activate();
-  spreadsheet.getCurrentCell().setFormula('=hyperlink("https://issuetracker.google.com/issues/36761866","comment 60 on original issue")');
-  spreadsheet.getRange('A2').activate();
-  spreadsheet.getRange('C1').activate().setValue('This function works on any sheet, but run here for demonstration.');
-  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('Update Multiple Values'), true);
-  spreadsheet.getCurrentCell().setFormula('=hyperlink("https://ctrlq.org/code/20504-update-google-sheet-cell-values","source article for initial idea")');
-  //PREP SHEETS
-  highlights();
-
-  function highlights() {
-    var spreadsheet = SpreadsheetApp.getActive();
-    spreadsheet.setActiveSheet(spreadsheet.getSheetByName('Update Multiple Values'), true);
-    spreadsheet.getRange('A2').activate();
-    spreadsheet.getActiveRangeList().setBackground('#ffff00');
-    spreadsheet.getRange('B2:B4').activate();
-    spreadsheet.getActiveRangeList().setBackground('#4a86e8');
-    spreadsheet.getRange('C2:E2').activate();
-    spreadsheet.getActiveRangeList().setBackground('#c9daf8');
-    spreadsheet.getRange('F2:H3').activate();
-    spreadsheet.getActiveRangeList().setBackground('#b4a7d6');
-    spreadsheet.getRange('A6').activate();
-    spreadsheet.getActiveRangeList().setBackground('#b4a7d6');
+  var umcSheet = spreadsheet.getSheetByName('Update Multiple Cells');
+  if (umcSheet) {
+    umcSheet.clear();
+    populateUpdateMultipleCells();
+  } else {
+    // create it - insert a new sheet at the beginning
+    umcSheet = thisSpreadsheet.insertSheet('Update Mulitple Cells', 0);
+    //PREP SHEETS
+    populateUpdateMultipleCells();
+    highlightsForUpdateMultipleCells();
   }
-}
+  //Manipulate Disjoint Ranges
+  var mdrSheet = spreadsheet.getSheetByName('Manipulate Disjoint Ranges');
+  if (mdrSheet) {
+    mdrSheet.clear();
+  } else {
+    // create it - insert a new sheet at the beginning
+    mdrSheet = thisSpreadsheet.insertSheet('Manipulate Disjoint Ranges', 0);
+  }
+  //PREP SHEETS
+  populateManipulateDisjointRanges();
+
+  //ENCLOSED FUNCTIONS
+  function populateManipulateDisjointRanges() {
+    mdrSheet.getRange('A1').activate();
+    mdrSheet.getCurrentCell().setFormula('=hyperlink("https://issuetracker.google.com/issues/36761866","comment 60 on original issue")');
+    mdrSheet.getRange('C1').activate().setValue('This function works on any sheet, but run here for demonstration.');
+  }
+
+  function populateUpdateMultipleCells() {
+    // umcSheet.setActiveSheet(umcSheet.getSheetByName('Update Multiple Values'), true);
+    umcSheet.getCurrentCell().setFormula('=hyperlink("https://ctrlq.org/code/20504-update-google-sheet-cell-values","source article for initial idea")');
+  }
+
+  function highlightsForUpdateMultipleCells() {
+    var spreadsheet = SpreadsheetApp.getActive();
+    umcSheet.setActiveSheet(umcSheet.getSheetByName('Update Multiple Values'), true);
+    umcSheet.getRange('A2').activate();
+    umcSheet.getActiveRangeList().setBackground('#ffff00');
+    umcSheet.getRange('B2:B4').activate();
+    umcSheet.getActiveRangeList().setBackground('#4a86e8');
+    umcSheet.getRange('C2:E2').activate();
+    umcSheet.getActiveRangeList().setBackground('#c9daf8');
+    umcSheet.getRange('F2:H3').activate();
+    umcSheet.getActiveRangeList().setBackground('#b4a7d6');
+    umcSheet.getRange('A6').activate();
+    umcSheet.getActiveRangeList().setBackground('#b4a7d6');
+  }
+} //end setupInputSheets
 /**
  * sheet1 demo
  * demonstrates mulitple cells updated in one execution
