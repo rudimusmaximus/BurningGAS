@@ -3,17 +3,17 @@
  */
 function setupQueryInputSheet() {
   var values = [
-    ['Date', 'Amount', 'Named'],
-    ['1/1/2016', '1', 'person jan'],
-    ['2/1/2017', '2', 'person feb'],
-    ['3/1/2017', '3', 'person mar'],
-    ['4/1/2017', '4', 'person apr'],
-    ['5/1/2017', '5', 'person may'],
-    ['6/1/2017', '6', 'person jun'],
+    ['Date', 'Amount', 'Named', '=hyperlink("https://gist.github.com/rudimusmaximus/133ef10736888e42f0c9ba89c07be546","source Gist for initial idea")'],
+    ['1/1/2016', '1', 'person jan',''],
+    ['2/1/2017', '2', 'person feb',''],
+    ['3/1/2017', '3', 'person mar',''],
+    ['4/1/2017', '4', 'person apr',''],
+    ['5/1/2017', '5', 'person may',''],
+    ['6/1/2017', '6', 'person jun',''],
   ];
   var spreadsheet = SpreadsheetApp.getActive();
   var inputSheet = spreadsheet.insertSheet('queryASheet-input',0);
-    inputSheet.getRange('A1:C7').setValues(values);
+    inputSheet.getRange('A1:D7').setValues(values);
 }
 
 /**
