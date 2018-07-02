@@ -4,7 +4,7 @@
 // global variable for hard coded values wwObj.ENUMS.SEMVER for example
 var wwObj = {
   ENUMS : {
-    SEMVER : "1.0.0"//working version as of end of GAS working session part 2
+    SEMVER : "1.1.0"//working version in prep for GAS working session part 3
   }
 };
 
@@ -18,7 +18,8 @@ function onOpen() {
   SpreadsheetApp.getUi() // Or DocumentApp or FormApp.
       .createMenu('Weekly Wednesday Menu')
       .addItem('Setup sheets', 'setupInputSheets')
-      .addItem('Update Multiple Cells', 'updateMulitpleCells')
+      .addItem('Update Multiple Cells', 'updateMultipleCells')
       .addItem('Manipulate Disjoint Ranges', 'manipulateDisjointRanges')
+      .addItem('Gist Query A Sheet', 'runQueryPlaceOutput')
       .addToUi();
 }
