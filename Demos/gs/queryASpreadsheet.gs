@@ -52,9 +52,10 @@ function runQueryPlaceOutput() {
     rows,
     "A1");
 
-  //activate result 
-  thisSpreadsheet.getSheetByName(newSheetName).activate();
-  return true;
+//  //activate result 
+//  SpreadsheetApp.getActiveSpreadsheet().getSheetByName(newSheetName).activate();
+////  thisSpreadsheet.getSheetByName(newSheetName).activate();
+//  return true;
 } //end runQueryPlaceOutput
 /**
  * This function uses url fetch to get data from a spreadsheet using a query style 

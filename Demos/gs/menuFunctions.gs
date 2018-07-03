@@ -3,6 +3,22 @@
  * demo functions just activate the sheet by name expecting it to be there
  */
 function setupInputSheets() {
+  var welcomeSheet = SpreadsheetApp.getActive().getSheetByName('Welcome');
+  if (welcomeSheet){
+    welcomeSheet.activate();
+    SpreadsheetApp.getActive().moveActiveSheet(0);
+  } else {
+    SpreadsheetApp.getActiveSpreadsheet().insertSheet('Welcome', 0);
+  }
+  var sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
+  var i = 1;
+  var numSheets = sheets.length;
+  if (numSheets>1){
+    do {
+      SpreadsheetApp.getActiveSpreadsheet().deleteSheet(sheets[i]);
+      i++;
+    } while (i<numSheets);
+  };
   //CREATE SHEETS
   //Gist Query A sheet
   setupQueryInputSheet();
