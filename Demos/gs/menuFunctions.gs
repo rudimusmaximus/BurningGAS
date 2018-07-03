@@ -63,7 +63,7 @@ function setupInputSheets() {
  */
 function updateMultipleCells(spreadsheetId) {
   var spreadsheet = SpreadsheetApp.getActive();
-  
+
   spreadsheet.getSheetByName('Update Multiple Cells').activate();
   var spreadsheetId = spreadsheetId || spreadsheet.getId(); //when called from menu no passed param, get the id in the users current sheet
   // TODO: compare to other approaches on batchUpdate and examine google examples
@@ -118,7 +118,7 @@ function updateMultipleCells(spreadsheetId) {
  **/
 function manipulateDisjointRanges() {
   var ss = SpreadsheetApp;
-  
+
   ss.setActiveSheet(ss.getActiveSpreadsheet().getSheetByName('Manipulate Disjoint Ranges'), true);
 
   ss.getActiveSheet().getActiveRangeList().getRanges().forEach(Outline);
