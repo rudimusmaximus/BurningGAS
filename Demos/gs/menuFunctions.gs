@@ -8,50 +8,38 @@ function setupInputSheets() {
     welcomeSheet.activate();
     SpreadsheetApp.getActive().moveActiveSheet(0);
   } else {
-    SpreadsheetApp.getActiveSpreadsheet().insertSheet('Welcome', 0);
+    SpreadsheetApp.getActiveSpreadsheet().insertSheet('Welcome', 0).activate();
   }
-  var sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
-  var i = 1;
-  var numSheets = sheets.length;
-  if (numSheets>1){
-    do {
-      SpreadsheetApp.getActiveSpreadsheet().deleteSheet(sheets[i]);
-      i++;
-    } while (i<numSheets);
-  };
+  var sheetIds = SpreadsheetApp.getActiveSpreadsheet().getSheets().map(function(e){return e.getSheetId()});
+  var numSheets = sheetIds.length;
+  
+  if(numSheets>1){ deleteSheetsBesidesFirstOne(sheetIds); }//combine sheet deletion into one call for performance improvement
+  
   //CREATE SHEETS
-  //Gist Query A sheet
-  setupQueryInputSheet();
   //Update Multiple Cells
   var spreadsheet = SpreadsheetApp.getActive();
-  var umcSheet = spreadsheet.getSheetByName('Update Multiple Cells');
-  if (umcSheet) {
-    umcSheet.clear();
-  } else {
-    // create it - insert a new sheet at the beginning
-    umcSheet = spreadsheet.insertSheet('Update Multiple Cells', 0);
-  }
+  var umcSheet = spreadsheet.insertSheet('Update Multiple Cells');
+  
   //PREP SHEETS
   populateUpdateMultipleCells();
   highlightsForUpdateMultipleCells();
-
+  
   //Manipulate Disjoint Ranges
-  var mdrSheet = spreadsheet.getSheetByName('Manipulate Disjoint Ranges');
-  if (mdrSheet) {
-    mdrSheet.clear();
-  } else {
-    // create it - insert a new sheet at the beginning
-    mdrSheet = spreadsheet.insertSheet('Manipulate Disjoint Ranges', 0);
-  }
+  var mdrSheet = spreadsheet.insertSheet('Manipulate Disjoint Ranges', 0);
+  
   //PREP SHEETS
   populateManipulateDisjointRanges();
-
-  //ENCLOSED FUNCTIONS
+  
+  //Gist Query A sheet
+  setupQueryInputSheet();
+  
+  
+//ENCLOSED FUNCTIONS
   function populateManipulateDisjointRanges() {
     mdrSheet.getRange('A1').activate();
     mdrSheet.getCurrentCell().setFormula('=hyperlink("https://issuetracker.google.com/issues/36761866","comment 60 on original issue")');
   }
-
+  
   function populateUpdateMultipleCells() {
     SpreadsheetApp.setActiveSheet(umcSheet, true);
     umcSheet.getCurrentCell().setFormula('=hyperlink("https://ctrlq.org/code/20504-update-google-sheet-cell-values","source article for initial idea")');
@@ -68,6 +56,14 @@ function setupInputSheets() {
     umcSheet.getActiveRangeList().setBackground('#b4a7d6');
     umcSheet.getRange('A6').activate();
     umcSheet.getActiveRangeList().setBackground('#b4a7d6');
+  }
+//credit   
+  function deleteSheetsBesidesFirstOne(sheetIds){
+
+    //Here, the first sheet ID is sheetIds[0]. So if you want to delete all sheets except for 1st sheet, you can create the request body like 
+    var requestBody = {requests: sheetIds.filter(function(_, i){return i != 0}).map(function(e){return {deleteSheet: {sheetId: e}}})};
+    Sheets.Spreadsheets.batchUpdate(requestBody, SpreadsheetApp.getActive().getId());
+  
   }
 } //end setupInputSheets
 /**
