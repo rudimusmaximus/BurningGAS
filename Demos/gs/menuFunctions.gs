@@ -16,16 +16,19 @@ function setupInputSheets() {
   if(numSheets>1){ deleteSheetsBesidesFirstOne(sheetIds); }//combine sheet deletion into one call for performance improvement
   
   //CREATE SHEETS
-  //Update Multiple Cells
   var spreadsheet = SpreadsheetApp.getActive();
-  var umcSheet = spreadsheet.insertSheet('Update Multiple Cells');
+  
+  //Create all expected input sheets and name them 
+  createAndNameAllInputSheets(spreadsheet.getId());
+  //Update Multiple Cells
+  var umcSheet = SpreadsheetApp.getActive().getSheetByName('Update Multiple Cells');
   
   //PREP SHEETS
   populateUpdateMultipleCells();
   highlightsForUpdateMultipleCells();
   
   //Manipulate Disjoint Ranges
-  var mdrSheet = spreadsheet.insertSheet('Manipulate Disjoint Ranges', 0);
+  var mdrSheet = SpreadsheetApp.getActive().getSheetByName('Manipulate Disjoint Ranges');
   
   //PREP SHEETS
   populateManipulateDisjointRanges();
@@ -35,6 +38,65 @@ function setupInputSheets() {
   
   
 //ENCLOSED FUNCTIONS
+/**
+ * enclosed function that creates all expected input sheets 
+ */
+ function createAndNameAllInputSheets(ssId){
+   var resource = {
+     "requests": [{ //initial request to create sheet of exactly right size
+       "addSheet": {
+         "properties": {
+           "title": "Update Multiple Cells",
+           "tabColor": {
+             "red": 30,
+             "green": 93,
+             "blue": 230,
+             "alpha": 1.00
+           },
+           "gridProperties": {
+             "columnCount": 10,
+             "rowCount": 25
+           }
+         }
+       },
+       "addSheet": {
+         "properties": {
+           "title": "Manipulate Disjoint Ranges",
+           "tabColor": {
+             "red": 30,
+             "green": 93,
+             "blue": 230,
+             "alpha": 1.00
+           },
+           "gridProperties": {
+             "columnCount": 10,
+             "rowCount": 25
+           }
+         }
+       },
+       "addSheet": {
+         "properties": {
+           "title": "queryASheet-input",
+           "tabColor": {
+             "red": 30,
+             "green": 93,
+             "blue": 230,
+             "alpha": 1.00
+           },
+           "gridProperties": {
+             "columnCount": 10,
+             "rowCount": 25
+           }
+         }
+       }
+     }],
+     "includeSpreadsheetInResponse": false
+   };
+   //batch update one
+   Sheets.Spreadsheets.batchUpdate(resource, ssId);
+ }//end createAndNameAllInputSheets()
+
+
   function populateManipulateDisjointRanges() {
     mdrSheet.getRange('A1').activate();
     mdrSheet.getCurrentCell().setFormula('=hyperlink("https://issuetracker.google.com/issues/36761866","comment 60 on original issue")');
@@ -58,12 +120,22 @@ function setupInputSheets() {
     umcSheet.getActiveRangeList().setBackground('#b4a7d6');
   }
 //credit   
-  function deleteSheetsBesidesFirstOne(sheetIds){
+  function deleteSheetsBesidesFirstOne(sheetIds) {
 
     //Here, the first sheet ID is sheetIds[0]. So if you want to delete all sheets except for 1st sheet, you can create the request body like 
-    var requestBody = {requests: sheetIds.filter(function(_, i){return i != 0}).map(function(e){return {deleteSheet: {sheetId: e}}})};
+    var requestBody = {
+      requests: sheetIds.filter(function(_, i) {
+        return i != 0
+      }).map(function(e) {
+        return {
+          deleteSheet: {
+            sheetId: e
+          }
+        }
+      })
+    };
     Sheets.Spreadsheets.batchUpdate(requestBody, SpreadsheetApp.getActive().getId());
-  
+
   }
 } //end setupInputSheets
 /**

@@ -9,7 +9,7 @@ function setupQueryInputSheet() {
     inputSheet.clear();
   } else {
     // insert a new sheet at the beginning
-    inputSheet = thisSpreadsheet.insertSheet('queryASheet-input', 0);
+    inputSheet = thisSpreadsheet.insertSheet('queryASheet-input');
   }
   // prepare values
   var values = [
