@@ -113,7 +113,7 @@ function populateNewSheet(ssId, valuesTwoD, sheetName, requiredColumns, required
     }],
     "includeSpreadsheetInResponse": false
   };
-  //batch upate one
+  //batch update one
   Sheets.Spreadsheets.batchUpdate(resource, ssId);
 
   var resourceTwo = {
