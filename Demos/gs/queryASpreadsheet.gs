@@ -4,7 +4,7 @@
 function setupQueryInputSheet() {
   // first clear anything in a sheet by that name in case running twice
   var thisSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  var inputSheet = thisSpreadsheet.getSheetByName('queryASheet-input');
+  var inputSheet = thisSpreadsheet.getSheetByName('queryASheet-input').activate();
   if (inputSheet) {
     inputSheet.clear();
   } else {
@@ -99,9 +99,9 @@ function populateNewSheet(ssId, valuesTwoD, sheetName, requiredColumns, required
         "properties": {
           "title": sheetName,
           "tabColor": {
-            "red": 115, //rgba(115,194,168,1.00)
-            "green": 194,
-            "blue": 168,
+            "red": 0,
+            "green": 1,
+            "blue": 0,
             "alpha": 1.00
           },
           "gridProperties": {
@@ -126,5 +126,5 @@ function populateNewSheet(ssId, valuesTwoD, sheetName, requiredColumns, required
   //different kind of batch update
   //this method has advantages of 'parsing' the entered data as if it were entered by a user so some strings may become numbers or dates for example
   Sheets.Spreadsheets.Values.batchUpdate(resourceTwo, ssId);
-
+  
 } //end function

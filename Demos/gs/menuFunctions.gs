@@ -20,6 +20,7 @@ function setupInputSheets() {
   
   //Create all expected input sheets and name them 
   createAndNameAllInputSheets(spreadsheet.getId());
+  
   //Update Multiple Cells
   var umcSheet = SpreadsheetApp.getActive().getSheetByName('Update Multiple Cells');
   
@@ -42,45 +43,17 @@ function setupInputSheets() {
  * enclosed function that creates all expected input sheets 
  */
  function createAndNameAllInputSheets(ssId){
+   
    var resource = {
-     "requests": [{ //initial request to create sheet of exactly right size
-       "addSheet": {
+     "requests": [
+       {"addSheet": {
          "properties": {
            "title": "Update Multiple Cells",
+           "index": 1,
            "tabColor": {
-             "red": 30,
-             "green": 93,
-             "blue": 230,
-             "alpha": 1.00
-           },
-           "gridProperties": {
-             "columnCount": 10,
-             "rowCount": 25
-           }
-         }
-       },
-       "addSheet": {
-         "properties": {
-           "title": "Manipulate Disjoint Ranges",
-           "tabColor": {
-             "red": 30,
-             "green": 93,
-             "blue": 230,
-             "alpha": 1.00
-           },
-           "gridProperties": {
-             "columnCount": 10,
-             "rowCount": 25
-           }
-         }
-       },
-       "addSheet": {
-         "properties": {
-           "title": "queryASheet-input",
-           "tabColor": {
-             "red": 30,
-             "green": 93,
-             "blue": 230,
+             "red": 0,
+             "green": 0,
+             "blue": 1,
              "alpha": 1.00
            },
            "gridProperties": {
@@ -89,11 +62,46 @@ function setupInputSheets() {
            }
          }
        }
-     }],
-     "includeSpreadsheetInResponse": false
+     },
+       {"addSheet": {
+         "properties": {
+           "title": "Manipulate Disjoint Ranges",
+           "index": 2,
+           "tabColor": {
+             "red": 0,
+             "green": 0,
+             "blue": 1,
+             "alpha": 1.00
+           },
+           "gridProperties": {
+             "columnCount": 10,
+             "rowCount": 25
+           }
+         }
+       }
+       },
+       {"addSheet": {
+         "properties": {
+           "title": "queryASheet-input",
+           "index": 3,
+           "tabColor": {
+             "red": 0,
+             "green": 0,
+             "blue": 1,
+             "alpha": 1.00
+           },
+           "gridProperties": {
+             "columnCount": 10,
+             "rowCount": 25
+           }
+         }
+       }
+       }],
+       "includeSpreadsheetInResponse": true
    };
-   //batch update one
-   Sheets.Spreadsheets.batchUpdate(resource, ssId);
+//batch update 
+   var response = Sheets.Spreadsheets.batchUpdate(resource, ssId);
+   SpreadsheetApp.flush();
  }//end createAndNameAllInputSheets()
 
 
