@@ -53,24 +53,6 @@ function setupInputSheets() {
           "addSheet": {
             "properties": {
               "title": "Update Multiple Cells",
-              "index": 1,
-              "tabColor": {
-                "red": 0,
-                "green": 0,
-                "blue": 1,
-                "alpha": 1.00
-              },
-              "gridProperties": {
-                "columnCount": 10,
-                "rowCount": 25
-              }
-            }
-          }
-        },
-        {
-          "addSheet": {
-            "properties": {
-              "title": "Manipulate Disjoint Ranges",
               "index": 2,
               "tabColor": {
                 "red": 0,
@@ -88,8 +70,26 @@ function setupInputSheets() {
         {
           "addSheet": {
             "properties": {
-              "title": "queryASheet-input",
+              "title": "Manipulate Disjoint Ranges",
               "index": 3,
+              "tabColor": {
+                "red": 0,
+                "green": 0,
+                "blue": 1,
+                "alpha": 1.00
+              },
+              "gridProperties": {
+                "columnCount": 10,
+                "rowCount": 25
+              }
+            }
+          }
+        },
+        {
+          "addSheet": {
+            "properties": {
+              "title": "queryASheet-input",
+              "index": 4,
               "tabColor": {
                 "red": 0,
                 "green": 0,
