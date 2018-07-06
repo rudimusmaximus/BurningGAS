@@ -52,10 +52,8 @@ function runQueryPlaceOutput() {
     rows,
     "A1");
 
-//  //activate result 
-//  SpreadsheetApp.getActiveSpreadsheet().getSheetByName(newSheetName).activate();
-////  thisSpreadsheet.getSheetByName(newSheetName).activate();
-//  return true;
+  //activate result 
+  SpreadsheetApp.getActiveSpreadsheet().getSheetByName(newSheetName).activate();
 } //end runQueryPlaceOutput
 /**
  * This function uses url fetch to get data from a spreadsheet using a query style 
@@ -126,5 +124,5 @@ function populateNewSheet(ssId, valuesTwoD, sheetName, requiredColumns, required
   //different kind of batch update
   //this method has advantages of 'parsing' the entered data as if it were entered by a user so some strings may become numbers or dates for example
   Sheets.Spreadsheets.Values.batchUpdate(resourceTwo, ssId);
-  
+  SpreadsheetApp.flush();  
 } //end function
