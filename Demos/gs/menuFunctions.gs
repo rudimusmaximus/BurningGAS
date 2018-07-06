@@ -3,34 +3,115 @@
  * demo functions just activate the sheet by name expecting it to be there
  */
 function setupInputSheets() {
-  //CREATE SHEETS
-  //Gist Query A sheet
-  setupQueryInputSheet();
-  //Update Multiple Cells
-  var spreadsheet = SpreadsheetApp.getActive();
-  var umcSheet = spreadsheet.getSheetByName('Update Multiple Cells');
-  if (umcSheet) {
-    umcSheet.clear();
+  var welcomeSheet = SpreadsheetApp.getActive().getSheetByName('Welcome');
+  if (welcomeSheet) {
+    welcomeSheet.activate();
+    SpreadsheetApp.getActive().moveActiveSheet(0);
   } else {
-    // create it - insert a new sheet at the beginning
-    umcSheet = spreadsheet.insertSheet('Update Multiple Cells', 0);
+    SpreadsheetApp.getActiveSpreadsheet().insertSheet('Welcome', 0).activate();
   }
+  var sheetIds = SpreadsheetApp.getActiveSpreadsheet().getSheets().map(function(e) {
+    return e.getSheetId()
+  });
+  var numSheets = sheetIds.length;
+
+  if (numSheets > 1) {
+    deleteSheetsBesidesFirstOne(sheetIds);
+  } //combine sheet deletion into one call for performance improvement
+
+  //CREATE SHEETS
+  var spreadsheet = SpreadsheetApp.getActive();
+
+  //Create all expected input sheets and name them 
+  createAndNameAllInputSheets(spreadsheet.getId());
+
+  //Update Multiple Cells
+  var umcSheet = SpreadsheetApp.getActive().getSheetByName('Update Multiple Cells');
+
   //PREP SHEETS
   populateUpdateMultipleCells();
   highlightsForUpdateMultipleCells();
 
   //Manipulate Disjoint Ranges
-  var mdrSheet = spreadsheet.getSheetByName('Manipulate Disjoint Ranges');
-  if (mdrSheet) {
-    mdrSheet.clear();
-  } else {
-    // create it - insert a new sheet at the beginning
-    mdrSheet = spreadsheet.insertSheet('Manipulate Disjoint Ranges', 0);
-  }
+  var mdrSheet = SpreadsheetApp.getActive().getSheetByName('Manipulate Disjoint Ranges');
+
   //PREP SHEETS
   populateManipulateDisjointRanges();
 
+  //Gist Query A sheet
+  setupQueryInputSheet();
+
+
   //ENCLOSED FUNCTIONS
+  /**
+   * enclosed function that creates all expected input sheets 
+   */
+  function createAndNameAllInputSheets(ssId) {
+
+    var resource = {
+      "requests": [{
+          "addSheet": {
+            "properties": {
+              "title": "Update Multiple Cells",
+              "index": 2,
+              "tabColor": {
+                "red": 0,
+                "green": 0,
+                "blue": 1,
+                "alpha": 1.00
+              },
+              "gridProperties": {
+                "columnCount": 10,
+                "rowCount": 25
+              }
+            }
+          }
+        },
+        {
+          "addSheet": {
+            "properties": {
+              "title": "Manipulate Disjoint Ranges",
+              "index": 3,
+              "tabColor": {
+                "red": 0,
+                "green": 0,
+                "blue": 1,
+                "alpha": 1.00
+              },
+              "gridProperties": {
+                "columnCount": 10,
+                "rowCount": 25
+              }
+            }
+          }
+        },
+        {
+          "addSheet": {
+            "properties": {
+              "title": "queryASheet-input",
+              "index": 4,
+              "tabColor": {
+                "red": 0,
+                "green": 0,
+                "blue": 1,
+                "alpha": 1.00
+              },
+              "gridProperties": {
+                "columnCount": 10,
+                "rowCount": 25
+              }
+            }
+          }
+        }
+      ],
+      "includeSpreadsheetInResponse": true
+    };
+    //batch update 
+    var response = Sheets.Spreadsheets.batchUpdate(resource, ssId);
+    SpreadsheetApp.flush();
+  } //end createAndNameAllInputSheets()
+
+
   function populateManipulateDisjointRanges() {
     mdrSheet.getRange('A1').activate();
     mdrSheet.getCurrentCell().setFormula('=hyperlink("https://issuetracker.google.com/issues/36761866","comment 60 on original issue")');
@@ -53,6 +134,25 @@ function setupInputSheets() {
     umcSheet.getRange('A6').activate();
     umcSheet.getActiveRangeList().setBackground('#b4a7d6');
   }
+  //credit   
+  function deleteSheetsBesidesFirstOne(sheetIds) {
+    //Thanks to https://plus.google.com/+KanshiTanaike for this approach
+    //of building the request object on the fly!
+    //Here, the first sheet ID is sheetIds[0]. So if you want to delete all sheets except for 1st sheet, you can create the request body like 
+    var requestBody = {
+      requests: sheetIds.filter(function(_, i) {
+        return i != 0
+      }).map(function(e) {
+        return {
+          deleteSheet: {
+            sheetId: e
+          }
+        }
+      })
+    };
+    Sheets.Spreadsheets.batchUpdate(requestBody, SpreadsheetApp.getActive().getId());
+
+  }
 } //end setupInputSheets
 /**
  * sheet1 demo
@@ -63,10 +163,9 @@ function setupInputSheets() {
  */
 function updateMultipleCells(spreadsheetId) {
   var spreadsheet = SpreadsheetApp.getActive();
-  
+
   spreadsheet.getSheetByName('Update Multiple Cells').activate();
   var spreadsheetId = spreadsheetId || spreadsheet.getId(); //when called from menu no passed param, get the id in the users current sheet
-  // TODO: compare to other approaches on batchUpdate and examine google examples
   var data = [{
       range: "'Update Multiple Cells'!A2", // Update single cell
       values: [
@@ -118,7 +217,7 @@ function updateMultipleCells(spreadsheetId) {
  **/
 function manipulateDisjointRanges() {
   var ss = SpreadsheetApp;
-  
+
   ss.setActiveSheet(ss.getActiveSpreadsheet().getSheetByName('Manipulate Disjoint Ranges'), true);
 
   ss.getActiveSheet().getActiveRangeList().getRanges().forEach(Outline);

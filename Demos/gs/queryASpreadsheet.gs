@@ -4,22 +4,22 @@
 function setupQueryInputSheet() {
   // first clear anything in a sheet by that name in case running twice
   var thisSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  var inputSheet = thisSpreadsheet.getSheetByName('queryASheet-input');
+  var inputSheet = thisSpreadsheet.getSheetByName('queryASheet-input').activate();
   if (inputSheet) {
     inputSheet.clear();
   } else {
     // insert a new sheet at the beginning
-    inputSheet = thisSpreadsheet.insertSheet('queryASheet-input', 0);
+    inputSheet = thisSpreadsheet.insertSheet('queryASheet-input');
   }
   // prepare values
   var values = [
     ['Date', 'Amount', 'Named', '=hyperlink("https://gist.github.com/rudimusmaximus/133ef10736888e42f0c9ba89c07be546","source Gist for initial idea")'],
-    ['1/1/2016', '1', 'person jan',''],
-    ['2/1/2017', '2', 'person feb',''],
-    ['3/1/2017', '3', 'person mar',''],
-    ['4/1/2017', '4', 'person apr',''],
-    ['5/1/2017', '5', 'person may',''],
-    ['6/1/2017', '6', 'person jun',''],
+    ['1/1/2016', '1', 'person jan', ''],
+    ['2/1/2017', '2', 'person feb', ''],
+    ['3/1/2017', '3', 'person mar', ''],
+    ['4/1/2017', '4', 'person apr', ''],
+    ['5/1/2017', '5', 'person may', ''],
+    ['6/1/2017', '6', 'person jun', ''],
   ];
   // place expected data to query 
   inputSheet.getRange('A1:D7').setValues(values);
@@ -37,25 +37,25 @@ function runQueryPlaceOutput() {
 
   var rows = result.length; //7
   var columns = result[0].length; //3
-
+  var newSheetName = 'queryASheet-output';
   // first clear anything in a sheet by that name in case running twice
   var thisSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  var outputSheet = thisSpreadsheet.getSheetByName('queryASheet-output');
-  if (outputSheet) {
-    outputSheet.clear();
-  } else {
-    // insert a new sheet at the beginning
-    outputSheet = thisSpreadsheet.insertSheet('queryASheet-output', 0);
-  }
+  var outputSheet = thisSpreadsheet.getSheetByName(newSheetName);
+  if (outputSheet) { //remove old output if it's there 
+    thisSpreadsheet.deleteSheet(outputSheet);
+  };
 
-  // write to the outputSheet
-  outputSheet.getRange(1, 1, rows, columns).setValues(result);
+  populateNewSheet(ssId,
+    result,
+    newSheetName,
+    columns,
+    rows,
+    "A1");
 
-  SpreadsheetApp.getActiveSpreadsheet().setActiveSheet(outputSheet);
-
-  trimResultsInSheet(ssId, outputSheet.getSheetId(), 'queryASheet-output', rows, columns);
-
-  return true;
+//  //activate result 
+//  SpreadsheetApp.getActiveSpreadsheet().getSheetByName(newSheetName).activate();
+////  thisSpreadsheet.getSheetByName(newSheetName).activate();
+//  return true;
 } //end runQueryPlaceOutput
 /**
  * This function uses url fetch to get data from a spreadsheet using a query style 
@@ -87,30 +87,44 @@ function queryASpreadsheet(sheetId, sheetName, rangeSyntax, queryString) {
   return dataTwoD;
 }
 /**
- * this uses advanced sheets service to set the size of the new output sheet to match
- * our 2d array
+ * using the advanced sheets api, this function
+ * creates, names, right sizes, and populates a 
+ * a new sheet and gives it a colored tab
  */
-function trimResultsInSheet(spreadsheetId, sheetId, sheetName, rows, columns) {
-  
-  
-  var resource = {
-  "requests": [
-    {
-      "updateSheetProperties": {
-        "properties": {
-          "sheetId": sheetId,
-          "title": sheetName,
-          "gridProperties": {
-            "columnCount": columns,
-            "rowCount": rows
-          }
-        },
-        "fields": "*"
-      }
-    }
-  ],
-  "includeSpreadsheetInResponse": false
-};
-  Sheets.Spreadsheets.batchUpdate(resource, spreadsheetId);
-}
+function populateNewSheet(ssId, valuesTwoD, sheetName, requiredColumns, requiredRows, startingCellA1Notation) {
 
+  var resource = {
+    "requests": [{ //initial request to create sheet of exactly right size
+      "addSheet": {
+        "properties": {
+          "title": sheetName,
+          "tabColor": {
+            "red": 0,
+            "green": 1,
+            "blue": 0,
+            "alpha": 1.00
+          },
+          "gridProperties": {
+            "columnCount": requiredColumns,
+            "rowCount": requiredRows
+          }
+        }
+      }
+    }],
+    "includeSpreadsheetInResponse": false
+  };
+  //batch update one
+  Sheets.Spreadsheets.batchUpdate(resource, ssId);
+
+  var resourceTwo = {
+    valueInputOption: "USER_ENTERED",
+    data: {
+      range: "'" + sheetName + "'!" + startingCellA1Notation, // Update a cell with a 2d array
+      values: valuesTwoD
+    }
+  };
+  //different kind of batch update
+  //this method has advantages of 'parsing' the entered data as if it were entered by a user so some strings may become numbers or dates for example
+  Sheets.Spreadsheets.Values.batchUpdate(resourceTwo, ssId);
+  
+} //end function
