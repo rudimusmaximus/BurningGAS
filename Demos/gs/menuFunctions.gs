@@ -52,8 +52,8 @@ function setupInputSheets() {
       "requests": [{
           "addSheet": {
             "properties": {
-              "title": "Update Multiple Cells",
-              "index": 2,
+              "title": "queryASheet-input",
+              "index": 4,
               "tabColor": {
                 "red": 0,
                 "green": 0,
@@ -88,8 +88,8 @@ function setupInputSheets() {
         {
           "addSheet": {
             "properties": {
-              "title": "queryASheet-input",
-              "index": 4,
+              "title": "Update Multiple Cells",
+              "index": 2,
               "tabColor": {
                 "red": 0,
                 "green": 0,
