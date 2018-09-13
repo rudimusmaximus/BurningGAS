@@ -7,10 +7,10 @@ Check out links for reading on our [Flipboard magazine](https://flipboard.com/@r
 # How to use
 Open a new google spreadsheet.
 
-Pull the .gs and .html files form this repository into your sheet's attached 
+Pull the .gs and .html files form this repository into your sheet's attached
 script editor.
 
-Enable any advanced services listed in the menu functions like sheets (both in 
+Enable any advanced services listed in the menu functions like sheets (both in
 the script editor and via link in the GCP console). See notes in the menu functions.
 
 Refresh your sheet and use the new menu to try out various demonstrations.
@@ -37,11 +37,11 @@ See [this codeacademy link](https://www.codecademy.com/tracks/javascript).
 #### working with 2d arrays
 Getting data into and out of a sheet using 2d arrays and few methods is the key to moving on from custom functions to macros to executing business logic on an array and then writing the results back to your sheet.
 ### 2 Remember, "It's *basically* Javascript" *BUT* an important note on standards
-The documentation alludes to [app script's basic javascript feature support](https://developers.google.com/apps-script/guides/services/#basic_javascript_features) which is 1.6 and some of Javascript 1.7 and 1.8. 
+The documentation alludes to [app script's basic javascript feature support](https://developers.google.com/apps-script/guides/services/#basic_javascript_features) which is 1.6 and some of Javascript 1.7 and 1.8.
 
 GAS support for javascript features can be confusing to a newcomer, especially when learning about javascript from the ECMAScript standards.  
 
-The ECMAScript (ES) implementation called "V8" is the javascript engine used by apps like chrome, node.js, opera, etc. This engine supports some of the latest ES javascript conventions. 
+The ECMAScript (ES) implementation called "V8" is the javascript engine used by apps like chrome, node.js, opera, etc. This engine supports some of the latest ES javascript conventions.
 
 However, google apps script is running on the servers and we have yet to see when or if the Google App Script (GAS) team will support more recent ES so developers can write consistently when writing javascript whether it's a web app or inside a GAS.
 
@@ -53,20 +53,20 @@ Star and follow this issue: https://issuetracker.google.com/36764074
 Start with this [Overview of Google Apps Script](https://developers.google.com/apps-script/overview). It includes a link to codeacademy for learning javascript if you need help there.
 ### 4 People and their books, classes, helpful websites or other activities they want to share in this context
 Please add to the comments and I'll include here over time. Thanks so much.
-#### From conferences on youtube 
+#### From conferences on youtube
 Please see the nice add-ons introduction and the end comments; in the middle is also a demo of ultradox which i haven't used.
-[Building G Suite add-ons with Google Apps Script (Google Cloud Next '17)](https://youtu.be/CLjXEdKbqqs) 
-#### From the comments below this post (thanks! VERY MUCH :) ) 
+[Building G Suite add-ons with Google Apps Script (Google Cloud Next '17)](https://youtu.be/CLjXEdKbqqs)
+#### From the comments below this post (thanks! VERY MUCH :) )
 - From https://gist.github.com/oshliaer, an amazing gist full of great resources by Alexander Ivanov
   - https://github.com/oshliaer/google-apps-script-awesome-list
 - https://gist.github.com/Blueprinter gives us this site of documents for how to across a lot of categories
-  - [Apps Script - Getting Started](https://sites.google.com/view/apps-script-getting-started/) 
+  - [Apps Script - Getting Started](https://sites.google.com/view/apps-script-getting-started/)
 #### From interesting posts on the Web  
 
 This great [gist by Amit Agarwal](https://gist.github.com/labnol/0b67f812a827fd9babc5)  
 
 
-For tutorials covering the basics, check out [The website of Barrie Roberts](https://www.bazroberts.com/category/apps-script/) 
+For tutorials covering the basics, check out [The website of Barrie Roberts](https://www.bazroberts.com/category/apps-script/)
 
 This G+ post has lots of [real uses for GAS](https://plus.google.com/102706994939807026322/posts/TMouYQWodmD). Highlights
  - workflow automation testimonials  
@@ -107,10 +107,10 @@ Learn more by solving one problem at a time. Join the [DevFlow Project](devflow4
 # WORKING SESSIONS
 These working sessions document the creation of a set of menu driven functions in a script container bound to a sheet. Watch it evolve and read through the notes. Follow along the videos and try them yourself.
 
- - This section is from a phase II project inside of the repo [DevFlow](https://github.com/rudimusmaximus/DevFlow); to catch up on that project try reading that repo's [issue 46](https://github.com/rudimusmaximus/DevFlow/issues/46) 
- 
+ - This section is from a phase II project inside of the repo [DevFlow](https://github.com/rudimusmaximus/DevFlow); to catch up on that project try reading that repo's [issue 46](https://github.com/rudimusmaximus/DevFlow/issues/46)
+
  - Specifically, a multi-part set of working sessions. The notes are included below along with links to the unedited recorded sessions were possible.  
- 
+
 ---  
 
 ## 2018.06.20 DF Weekly Working Session - script basics part 1   
@@ -160,7 +160,7 @@ These working sessions document the creation of a set of menu driven functions i
      - [our new repo for these GAS sessions](https://github.com/rudimusmaximus/BurningGAS)
      - Check the learning GIST for these two new links; we will likely pull the GIST into our new repo
          - This great [gist by Amit Agarwal](https://gist.github.com/labnol/0b67f812a827fd9babc5)  
-         - For tutorials covering the basics, check out [The website of Barrie Roberts](https://www.bazroberts.com/category/apps-script/) 
+         - For tutorials covering the basics, check out [The website of Barrie Roberts](https://www.bazroberts.com/category/apps-script/)
      - [explore these sources for data to use, especially 5](https://www.sba.gov/blogs/conducting-market-research-here-are-5-official-sources-free-data-can-help)
      - [Looking for data? Try Kaggle](https://www.kaggle.com/)
         - [Datasets](https://www.kaggle.com/datasets)
@@ -171,3 +171,46 @@ These working sessions document the creation of a set of menu driven functions i
         - [Javascript Linter in Atom](https://atom.io/packages/jshint)
      - [next week's topic](https://gist.github.com/rudimusmaximus/133ef10736888e42f0c9ba89c07be546)
  - **Next Week:** part 3
+
+ ## 2018.07.04 WS-GAS Basics Part 3
+ Canceled due to holiday; merging with General Session II.  
+
+ ## 2018.07.11 GS-General Session II (and WS-GAS Basics Part 3)  
+ ### [Recording Link](https://drive.google.com/a/redcrowmethods.com/file/d/1HPPWqFFY3RpdH9WkxeXpZR_R-FfO3-ZP/view?usp=sharing)  
+ ### Agenda with notes  
+  - **GAS Basics** working sessions to try out GAS on sheets data; some of these could be turned into demos of successful "GAS patterns"
+  - **Topics covered include**
+    - Catch up on the gas workshops via the video links and
+      - [our new repo for these GAS sessions "BurningGas"](https://github.com/rudimusmaximus/BurningGAS)
+    - Demo 'Gist query my sheet' shows SQL like query to a 2d array and use of advanced sheet service to right-size the new sheet with the exact number of rows and columns required
+    - demonstrate GitHub /compare feature
+        - 1.1.0 Gist query my sheet "make it possible"
+        - 1.1.1 Faster - batching more actions for speed "make it faster"
+        - 1.1.2 Functional - slightly slower for a reason, leveraging api best practices and workarounds "make it pleasant" for the first run, re-run
+
+  - **This week's Cool links with a few more added for time off**:
+      - [the importance of speed](https://www.hobo-web.co.uk/your-website-design-should-load-in-4-seconds/)  Incredible information here.
+      - [Designer vs. Developer YouTube series](https://www.youtube.com/playlist?list=PLNYkxOF6rcIC60856GnLEV5GQXMxc9ByJ) - Designer vs. Developer aims to provide takeaways, solutions to workflows, tools & discussions on everyday struggles. **Especially check out the notes for links.** For example, #17 "Using Gestalt Principles to Improve Your Design" mentions these two gems among others
+          - [Gestalt laws of grouping](http://bit.ly/2tNUqpr)  
+          - [Universal Principles of Design](http://universalprinciplesofdesign.com/)
+              - [Becoming Leonardo: How Great Designers Think on youtube free](https://www.youtube.com/watch?v=rdH8Kuku9tA)
+      - [revered article on javascript patterns with modules](http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html)  
+      - **replay of Google's App Maker panel session** [Totally Unscripted panel on App Maker Questions](https://plus.google.com/+TotallyUnscriptedShow/posts/enTWZ3dUPTm)
+      - [dotfiles](https://dotfiles.github.io/) Your unofficial guide to dotfiles on GitHub. **Let's discuss if we need to define this as part of our setup and config or an open call for tools that do this**
+      - [A deep set of highly competent content for GAS skills](https://plus.google.com/+KanshiTanaike/posts/99HfmGLDJY3) This person's work is amazing. Go deeper with the links and learn lots.
+      - [Google Apps Developer Series: How to Increase Traffic to your Add-On With AppsScript](https://www.youtube.com/watch?authindex=0&v=vToNpuLiMHE) Inventor of GAS gives addon advice, originally a Cloud Connect Live Event Streamed live on Jun 2, 2015. Great material. Also, they mention which javascript engine is being used!
+      - [Using Google Apps Script to automate G Suite (Google Cloud Next '17)](https://www.youtube.com/watch?v=vBsIYZEqjTA) This more recent walkthrough has a very good and straightforward set of code examples in their presentation. Especially look for stubbing of services for testing in the Gmail example and the use of templated HTML with regard to the use of escaped javascript in the html file in the web app section - not sure if the second one is best practice or not but it's interesting.
+
+# Ready to move on to add-ons?
+Try this repo where you can see some of these functions translated into sheets add-ons.
+DevFlow is also about workflow for professionalizing developmenet of google apps script.
+Here are a few links:
+Install and try our add-on from an unlisted link:
+https://github.com/rudimusmaximus/DevFlow/issues/65
+
+If you want to see more about the history of the making of the repo with lots of readme links, see
+https://github.com/rudimusmaximus/DevFlow/issues/46
+
+Remember to star the repo, thanks.
+
+We will be cleaning up the documents, so look for updates ver the comming months.

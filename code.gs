@@ -4,12 +4,12 @@
 // global variable for hard coded values wwObj.ENUMS.SEMVER for example
 var wwObj = {
   ENUMS: {
-    SEMVER: "1.1.2" //working version in prep for GAS working session part 3
+    SEMVER: "1.1.3" //working version in prep for GAS working session part 3
   }
 };
 
 /**
- * Example function onOpen (modified), see this link for details: 
+ * Example function onOpen (modified), see this link for details:
  * https://developers.google.com/apps-script/guides/triggers/
  **/
 
