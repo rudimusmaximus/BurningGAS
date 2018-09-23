@@ -213,4 +213,4 @@ https://github.com/rudimusmaximus/DevFlow/issues/46
 
 Remember to star the repo, thanks.
 
-We will be cleaning up the documents, so look for updates ver the comming months.
+We will be cleaning up the documents, so look for updates over the comming months.
