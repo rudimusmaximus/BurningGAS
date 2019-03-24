@@ -33,7 +33,7 @@ Just the orgainizing principles and some key links.
 Scripts are 'bound' to a container like sheets, docs, slides or forms. These can be accessed from the containing doc and opened say in sheets by going to the menu Tools > Script editor. Scripts can also be standalone for addons or web apps.
 Your script home page is a dashboard found here [script.google.com](https://script.google.com). The [help link there](https://developers.google.com/apps-script/guides/dashboard) will get you to an explanation of the dashboard.
 #### javascript basics
-See [this codeacademy link](https://www.codecademy.com/tracks/javascript).
+See [this codeacademy link](https://www.codecademy.com/catalog/language/javascript).  
 #### working with 2d arrays
 Getting data into and out of a sheet using 2d arrays and few methods is the key to moving on from custom functions to macros to executing business logic on an array and then writing the results back to your sheet.
 ### 2 Remember, "It's *basically* Javascript" *BUT* an important note on standards
