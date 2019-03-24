@@ -7,7 +7,7 @@ Check out links for reading on our [Flipboard magazine](https://flipboard.com/@r
 # How to use
 Open a new google spreadsheet.
 
-Pull the .gs and .html files form this repository into your sheet's attached
+Pull the .gs and .html files from this repository into your sheet's attached
 script editor.
 
 Enable any advanced services listed in the menu functions like sheets (both in
@@ -31,7 +31,7 @@ Provide a living document for whenever someone asks, " so, how do i get started 
 Just the orgainizing principles and some key links.
 ### 1 Starting point: Good Things to Keep in Mind
 Scripts are 'bound' to a container like sheets, docs, slides or forms. These can be accessed from the containing doc and opened say in sheets by going to the menu Tools > Script editor. Scripts can also be standalone for addons or web apps.
-Your script home page is a dashboard found here [script.google.com](script.google.com). The [help link there](https://developers.google.com/apps-script/guides/dashboard) will get you to an explanation of the dashboard.
+Your script home page is a dashboard found here [script.google.com](https://script.google.com). The [help link there](https://developers.google.com/apps-script/guides/dashboard) will get you to an explanation of the dashboard.
 #### javascript basics
 See [this codeacademy link](https://www.codecademy.com/tracks/javascript).
 #### working with 2d arrays
