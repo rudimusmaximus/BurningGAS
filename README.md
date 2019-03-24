@@ -109,7 +109,7 @@ These working sessions document the creation of a set of menu driven functions i
 
  - This section is from a phase II project inside of the repo [DevFlow](https://github.com/rudimusmaximus/DevFlow); to catch up on that project try reading that repo's [issue 46](https://github.com/rudimusmaximus/DevFlow/issues/46)
 
- - Specifically, a multi-part set of working sessions. The notes are included below along with links to the unedited recorded sessions were possible.  
+ - Specifically, a multi-part set of working sessions. The notes are included below along with links to the unedited recorded sessions when possible.  
 
 ---  
 
