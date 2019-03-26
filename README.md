@@ -46,7 +46,11 @@ The ECMAScript (ES) implementation called "V8" is the javascript engine used by 
 However, google apps script is running on the servers and we have yet to see when or if the Google App Script (GAS) team will support more recent ES so developers can write consistently when writing javascript whether it's a web app or inside a GAS.
 
 Star and follow this issue: https://issuetracker.google.com/36764074  
-**Advanced users**: there are some emerging transpilers modified for GAS but I haven't worked with them yet. Babel?  
+**Advanced users**: 
+You can write more advanced JS using [Typescript](https://developers.google.com/apps-script/guides/typescript) and [interect with standalone script projects from the cli](https://developers.google.com/apps-script/guides/clasp) using Node package [clasp](https://www.npmjs.com/package/@google/clasp).
+However, if you're just starting or don't know the command line, just use the online editor and understand it's older JS if you hit an syntax error. Focus on the action plan first.
+Google has stated it will support modern JS in thier G.A.S. offering but will not say when. If so, there should be great performance gains too!
+
 ### 3 Key Google links
 [Welcome page about scripts](https://developers.google.com/apps-script/)
 
